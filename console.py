@@ -17,12 +17,17 @@ class HBNBCommand(cmd.Cmd):
     """Command interpreter"""
     def do_EOF(self, line):
         """ EOF command to exit the program """
+        print()
         return True
     def do_quit(self, line):
         """Quit command to exit the program"""
         return True
     def emptyline(self, line):
+        """ print nothing on empty line """
         pass
+    def do_help(self, arg):
+        """Show help message"""
+        super().do_help(arg)
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
