@@ -85,22 +85,24 @@ class HBNBCommand(cmd.Cmd):
                 print("** class doesn't exist **")
 
     def do_update(self, arg):
-        """Update an instance based on class name and id"""
+        """Update an instance based on class name and id (BaseModel or User)"""
         if not arg:
             print("** class name missing **")
             return
         try:
             args = arg.split()
             class_name = eval(args[0]).__name__
+            if class_name == "User":
+                class_name = "models.user.User"
             instance_id = args[1]
             instance = storage.get_object_by_id(class_name, instance_id)
 
             if instance:
                 if len(args) < 4:
                     if len(args) == 2:
-                        print("** attribute name missing **")
+                        print("** instance id missing **")
                     elif len(args) == 3:
-                        print("** value missing **")
+                        print("** attribute name missing **")
                 else:
                     attr_name = args[2]
                     attr_value_str = args[3]
@@ -127,6 +129,7 @@ class HBNBCommand(cmd.Cmd):
         except NameError:
             print("** class doesn't exist **")
 
+      
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
 
