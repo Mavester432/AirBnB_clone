@@ -129,6 +129,20 @@ class HBNBCommand(cmd.Cmd):
         except NameError:
             print("** class doesn't exist **")
 
+    def do_count(self, arg):
+        """Retrieve the number of instances of a class"""
+        if not arg:
+            print("** class name missing **")
+            return
+        try:
+            class_name = eval(arg).__name__
+            if class_name == "User":
+                class_name = "models.user.User"
+            count = sum(1 for obj in storage.all().values() if obj.__class__.__name__ == class_name)
+            print(count)
+        except NameError:
+            print("** class doesn't exist **")
+
       
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
