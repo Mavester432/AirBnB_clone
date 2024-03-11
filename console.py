@@ -3,6 +3,14 @@
 import cmd
 from models.base_model import BaseModel
 from models import storage
+from models.base_model import BaseModel
+from models.user import User
+from models.state import State
+from models.city import City
+from models.place import Place
+from models.amenity import Amenity
+from models.review import Review
+
 
 class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
@@ -17,24 +25,24 @@ class HBNBCommand(cmd.Cmd):
             "Review"
             }
 
-    def do_quit(self, arg):
+    def do_quit(self, line):
         """Exit the program"""
         return True
 
-    def do_EOF(self, arg):
+    def do_EOF(self, line):
         """Exit the program"""
         print()
         return True
 
-    def do_help(self, arg):
+    def do_help(self, line):
         """Show help message"""
-        super().do_help(arg)
+        super().do_help(line)
 
     def emptyline(self):
         """Do nothing on empty line"""
         pass
 
-    def do_create(self, arg):
+    def do_create(self, line):
         """Create a new instance of BaseModel"""
         if not arg:
             print("** class name missing **")
